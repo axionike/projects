@@ -1,0 +1,10 @@
+SEPARATOR
+TEST_PARSE
+   1531    1641354      1234123
+
+
+SEPARATOR
+TEST_PARSE1
+ 12123  135 33
+
+/Users/ilee/Documents/perltest.txt
