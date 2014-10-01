@@ -5,7 +5,7 @@ Last edited: 20140929
 
 Program name: student_struct_sorter.c
 
-Program purpose: 	
+Program purpose:
 This program is designed to prompt user for various pieces of information about a number of students; sort the students alphabetically, by student number, and GPA; and return a sorted list according to which field is selected. This will have the same functionality as student_sorter, but utilizes a user defined struct to organize the information.
 
 Functions:
@@ -42,26 +42,65 @@ Side effects:	None
 int numberOfStudents(void) {
 	int num, result;
 	char line[256];
-	
+
 	do {
 		printf("Enter the number of students>");
 		if (fgets(line, sizeof(line), stdin)) {
 			result = sscanf(line, "%d", &num);
-    		if ((result != 1) || (num <= 0) || (num > 10)) {
+			if ((result != 1) || (num <= 0) || (num > 10)) {
 				printf("Invalid input, must be a positive integer from 1 to 10.\n");
 			}
 		}
-	} while ((result != 1) || (num <= 0) || (num > 10));
+	} while ((result != 1) || (num <= 0) || (num > 10)); // max number of students is 10
 	return(num);
 }
 
+void getData(student_t student[], int num) {
+	int i,
+		studentNumber,
+		result;
+
+	studentNumber = 1;
+	for (i=0; i<num; i++) {
+		printf("Enter name of student #%d>", studentNumber);
+		fflush(stdin);
+		scanf("%s", student[i].name);
+
+	/* prompt user for student number and check validity */
+		do {
+			printf("Enter student number for student #%d>", studentNumber);
+			if (fgets(line, sizeof(line), stdin)) {
+				result = sscanf(line, "%d", &(student[i].id));
+				if ((result != 1) || (student[i].id <= 0)) {
+					printf("Invalid input, student ID number must be a positive integer.\n");
+				}
+			}
+		} while ((result != 1) || (student[i].id <= 0));
+
+	/* prompt user for GPA and check validity */
+		do {
+			printf("Enter GPA for student #%d>", studentNumber);
+			if (fgets(line, sizeof(line), stdin)) {
+				result = sscanf(line, "%lf", &(student[i].gpa));
+				if ((result != 1) || (student[i].gpa < 0.0) || (student[i].gpa > 4.0)) {
+					printf("Invalid input, GPA must be a number between 0.0 and 4.0\n");
+				}
+			}
+		} while ((result != 1) || (student[i].gpa < 0.0) || (student[i].gpa > 4.0));
+
+		// iterate student number
+		studentNumber += 1;
+	}
+}
+
+
 int main(void) {
 	student_t student[MAX_STUDENTS];
-	
+
 	int num,
 		result,
 		menu;
-		
+
 	num = numberOfStudents();
 	printf("The program executed correctly if the number of students you entered was: %d ", num);
 }
