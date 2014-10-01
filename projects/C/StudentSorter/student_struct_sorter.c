@@ -8,7 +8,19 @@ Program name: student_struct_sorter.c
 Program purpose:
 This program is designed to prompt user for various pieces of information about a number of students; sort the students alphabetically, by student number, and GPA; and return a sorted list according to which field is selected. This will have the same functionality as student_sorter, but utilizes a user defined struct to organize the information.
 
+Custom structure:
+typedef struct{
+	char name[MAX_STUDENT_NAME_LENGTH];
+	double gpa;
+	int id;
+} student_t;
+
 Functions:
+int numberOfStudents(void)
+void getData(student_t student[], int num)
+
+int main(void)
+
 
 
 ******************************************************************************/
@@ -92,6 +104,8 @@ void getData(student_t student[], int num) {
 		studentNumber += 1;
 	}
 }
+
+// void sortStudents(
 
 
 int main(void) {
