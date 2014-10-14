@@ -1,8 +1,5 @@
-12123
-135
-33
-TEST_PARSE1
-1531
-1641354
-1234123
-TEST_PARSE
+heading: TEST_PARSE
+	value:	TEST_HEADING
+		TEST_PARSE	
+	value:	value 0
+		/Users/ilee/Documents/perltest.txt	

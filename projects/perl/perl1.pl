@@ -1,7 +1,8 @@
 #!/usr/bin/perl
 
-use strict;
-use warnings;
+# Playing around with Perl. This doesn't do what it's supposed to.
+# Check out perl2.pl for a working script.
+
 
 use strict;
 use warnings;
