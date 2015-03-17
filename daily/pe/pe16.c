@@ -1,7 +1,7 @@
 /* Project Euler
 ** 16
-** I have the algorithm correct, but casting ints to char is just not happening.
-** Maybe come back to this later at some point.
+** Sum of the digits of the number 2^1000
+** Considerations: This number is definitely too big for a 64-bit unsigned, so will require storing the values in a char array.
 */
 
 #include <stdio.h>
@@ -24,34 +24,41 @@ unsigned long getSum(void) {
 	int i = 0;
 
 	do {
-		sum+=(powerdigit[i] - '0');
-		i++;
-	} while (powerdigit[i] != '\0' || i < 500);
+		if(powerdigit[i] != '\0') {
+			sum+=(int)(powerdigit[i] - 48);
+			i++;
+		}
+	} while (powerdigit[i] != '\0' && i < 500);
 
-	printf("i-sum = %d\n", i);
+	printf("i-sum = %lu\n", sum);
 
 	return sum;
 }
 
 void writeDigits(int digits) {
 
-	int j = digits-1;
+	int j = 0;
+	int dig1 = 1; //always 1 for tens
+	int dig2;
 
 	do {
-		if (2*(powerdigit[j] - '0') >= 10) {
+		if (2*((int)powerdigit[j] - 48) >= 10) {
+			dig1 = 1;
+			dig2 = ((int)powerdigit[j] - 48) % 10;
 			if (powerdigit[j+1] == '\0') {
-				powerdigit[j+1] = (1 - '0');
+				powerdigit[j+1] = '1'; // char version of "1"
 			}
 			else {
-				powerdigit[j+1] = ((powerdigit[j+1] - '0') + 1) - '0';
+				powerdigit[j+1] = (int)(powerdigit[j+1] - 48) + 1;
 			}
-			powerdigit[j] = (((powerdigit[j] - '0') % 5) * 2) - '0';
+			powerdigit[j] = ( (int)(powerdigit[j] - 48) * 2) + 48;
 		}
 		else {
-			powerdigit[j] = 2*(powerdigit[j] - '0') - '0';
+			powerdigit[j] = 2*((int)(powerdigit[j] - 48)) + 48;
 		}
-		j--;
-	} while (j >= 0);
+		j++;
+	} while (powerdigit[j] != '\0');
+
 }
 
 
@@ -61,10 +68,10 @@ int main(int argc, char** argv) {
 
 	initializeArray();
 
-	powerdigit[0] = (1 - '0');
-	printf("%.*s\n", 1, powerdigit);
+	powerdigit[0] = 49;
+	// printf("%.*s\n", 1, powerdigit);
 
-	for (i=0; i < 1000; i++) {
+	for (i=0; i <= 1000; i++) {
 		int digits = 1;
 
 		do {
