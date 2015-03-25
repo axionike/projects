@@ -18,6 +18,6 @@ int main(int argc, char** argv) {
 
 	printf("The sum of all multiples of 3 and 5 below 1000 is: %d\n", sum_of_multiples);
 
-return 0;
+	return 0;
 }
 
