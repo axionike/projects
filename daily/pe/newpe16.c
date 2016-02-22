@@ -118,6 +118,7 @@ int main(int argc, char** argv)
 		printnumber();
 	}
 
+	printf("2^1000 = %s\n", powerdigit);
 	euler = getSum();
 
 	printf("%lu\n", euler);
